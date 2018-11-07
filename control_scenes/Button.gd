@@ -1,4 +1,4 @@
-extends AnimatedSprite
+extends Node2D
 
 # class member variables go here, for example:
 # var a = 2
@@ -13,7 +13,7 @@ func _ready():
 	randomize()
 	
 	#Random Color
-	frames.modulate = Color(randf(), randf(), randf())
+	$AnimatedSprite.modulate = Color(randf(), randf(), randf())
 	
 	#Give a random name
 	var valid_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
