@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://control_scenes/Slider.gd" type="Script" id=1]
+[ext_resource path="res://tiles/slider_bar.png" type="Texture" id=2]
+[ext_resource path="res://tiles/slider_slide.png" type="Texture" id=3]
+
+[node name="Slider" type="Node2D"]
+
+script = ExtResource( 1 )
+
+[node name="Bar" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Slide" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+
