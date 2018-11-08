@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 MedAlgo="*res://scripts/MedAlgo.gd"
+Story="*res://scripts/Story.gd"
 
 [gui]
 

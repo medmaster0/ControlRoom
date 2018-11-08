@@ -13,7 +13,7 @@ animations = [ {
 "speed": 3.0
 } ]
 
-[node name="Button" type="Node2D" index="0"]
+[node name="Button" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -21,6 +21,7 @@ script = ExtResource( 1 )
 
 frames = SubResource( 1 )
 animation = "default"
+frame = 1
 playing = true
 centered = false
 _sections_unfolded = [ "Transform" ]

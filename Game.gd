@@ -24,7 +24,6 @@ func _ready():
 		#if child.name_label != null:
 		if "name_label" in child:
 			var change_color = MedAlgo.contrastColor(background_color)
-			print(change_color)
 			child.name_label.modulate = change_color
 	
 	pass
