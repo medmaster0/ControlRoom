@@ -1,63 +1,66 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
-[ext_resource path="res://control_scenes/Button.tscn" type="PackedScene" id=2]
-[ext_resource path="res://control_scenes/Knob.tscn" type="PackedScene" id=3]
-[ext_resource path="res://control_scenes/Slider.tscn" type="PackedScene" id=4]
-[ext_resource path="res://control_scenes/Keypad.tscn" type="PackedScene" id=5]
-[ext_resource path="res://tiles/blank.png" type="Texture" id=6]
-[ext_resource path="res://things/Creature.tscn" type="PackedScene" id=7]
-[ext_resource path="res://things/Manual.tscn" type="PackedScene" id=8]
+[ext_resource path="res://things/Creature.tscn" type="PackedScene" id=2]
+[ext_resource path="res://control_scenes/Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://control_scenes/Knob.tscn" type="PackedScene" id=4]
+[ext_resource path="res://control_scenes/Slider.tscn" type="PackedScene" id=5]
+[ext_resource path="res://control_scenes/Keypad.tscn" type="PackedScene" id=6]
+[ext_resource path="res://tiles/blank.png" type="Texture" id=7]
+[ext_resource path="res://resources/Tileset.tres" type="TileSet" id=8]
+[ext_resource path="res://TileMap.gd" type="Script" id=9]
+[ext_resource path="res://things/Manual.tscn" type="PackedScene" id=10]
 
 [node name="Game" type="Node" index="0"]
 
 script = ExtResource( 1 )
+Creature = ExtResource( 2 )
 
-[node name="Button" parent="." index="0" instance=ExtResource( 2 )]
+[node name="Button" parent="." index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 133.25, 90 )
 
-[node name="Button2" parent="." index="1" instance=ExtResource( 2 )]
+[node name="Button2" parent="." index="1" instance=ExtResource( 3 )]
 
 position = Vector2( 307.25, 88.25 )
 
-[node name="Button3" parent="." index="2" instance=ExtResource( 2 )]
+[node name="Button3" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 209, 88.75 )
 
-[node name="Knob" parent="." index="3" instance=ExtResource( 3 )]
+[node name="Knob" parent="." index="3" instance=ExtResource( 4 )]
 
 position = Vector2( 318.25, 184.75 )
 
-[node name="Knob2" parent="." index="4" instance=ExtResource( 3 )]
+[node name="Knob2" parent="." index="4" instance=ExtResource( 4 )]
 
 position = Vector2( 218.75, 186.25 )
 
-[node name="Knob3" parent="." index="5" instance=ExtResource( 3 )]
+[node name="Knob3" parent="." index="5" instance=ExtResource( 4 )]
 
 position = Vector2( 141.25, 183.25 )
 
-[node name="Slider" parent="." index="6" instance=ExtResource( 4 )]
+[node name="Slider" parent="." index="6" instance=ExtResource( 5 )]
 
 position = Vector2( 143.25, 265 )
 
-[node name="Slider2" parent="." index="7" instance=ExtResource( 4 )]
+[node name="Slider2" parent="." index="7" instance=ExtResource( 5 )]
 
 position = Vector2( 319.5, 263.25 )
 
-[node name="Slider3" parent="." index="8" instance=ExtResource( 4 )]
+[node name="Slider3" parent="." index="8" instance=ExtResource( 5 )]
 
 position = Vector2( 219.5, 263.75 )
 
-[node name="Keypad" parent="." index="9" instance=ExtResource( 5 )]
+[node name="Keypad" parent="." index="9" instance=ExtResource( 6 )]
 
 position = Vector2( 324.5, 357 )
 
-[node name="Keypad2" parent="." index="10" instance=ExtResource( 5 )]
+[node name="Keypad2" parent="." index="10" instance=ExtResource( 6 )]
 
 position = Vector2( 216.5, 354 )
 
-[node name="Keypad3" parent="." index="11" instance=ExtResource( 5 )]
+[node name="Keypad3" parent="." index="11" instance=ExtResource( 6 )]
 
 position = Vector2( 138.5, 355 )
 
@@ -72,13 +75,13 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="Background" type="Sprite" parent="CanvasLayer" index="0"]
 
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="TileMap" type="TileMap" parent="." index="13"]
 
-editor/display_folded = true
+position = Vector2( -0.5, 0 )
 mode = 0
-tile_set = null
+tile_set = ExtResource( 8 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -94,13 +97,15 @@ collision_mask = 1
 occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray(  )
+script = ExtResource( 9 )
 _sections_unfolded = [ "Cell" ]
 
-[node name="Creature" parent="TileMap" index="0" instance=ExtResource( 7 )]
+[node name="Creature" parent="TileMap" index="0" instance=ExtResource( 2 )]
 
 position = Vector2( 515, 90 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Manual" parent="." index="14" instance=ExtResource( 8 )]
+[node name="Manual" parent="." index="14" instance=ExtResource( 10 )]
 
 position = Vector2( 495, 90.5 )
 

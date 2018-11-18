@@ -54,7 +54,9 @@ func _ready():
 			$Sprite.set_texture(hat_tex13)
 			$Sprite2.set_texture(hat_tex14)
 			
-	pass
+	
+	
+	#End of READY
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

@@ -26,7 +26,7 @@ func _ready():
 	#Create the Label Scene
 	name_label = Label.new()
 	name_label.text = name
-	name_label.margin_top =  -16
+	name_label.margin_top =  -32
 	name_label.margin_left = 0
 	add_child(name_label)
 	
