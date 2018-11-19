@@ -23,5 +23,3 @@ func generateName():
 	#ADD A VOWEL
 	temp_char = vowels[randi()%vowels.length()]
 	temp_name = temp_name + temp_char	
-
-	print(temp_name)

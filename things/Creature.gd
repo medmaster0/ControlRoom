@@ -15,6 +15,13 @@ var zodiac_tile
 #var zodiac_background #children, not vars
 var creature_name = ""
 
+var path = [] #A set of steps to follow in pathfinding
+#path is in MAP COORDS
+#------
+var total_delta = 0 #used as a counter in process loop
+
+var is_main = false #Used to specify which Creature is the "Leader"
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -42,10 +49,21 @@ func _ready():
 	creature_name = Story.generateName()
 	
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _process(delta):
+	# Called every frame. Delta is time since last frame.
+	# Update game logic here.
+	total_delta = total_delta + delta
+	
+	var time_period = 0.5
+	
+	if total_delta > time_period:
+		
+		#Take a step in the path
+		path_step()
+			
+		total_delta = total_delta - time_period
+	
+	pass
 
 
 # Get our position in Map Coordinates
@@ -72,25 +90,44 @@ func step(dir):
 	else:
 		pass
 
-func _input( event ):
-	
-	# Input
-    # Step Actions
-	if event.is_action_pressed("ui_up"):
-		step( Vector2( 0, -1 ) )
-	if event.is_action_pressed("ui_down"):
-		step( Vector2( 0, 1 ) )
-	if event.is_action_pressed("ui_left"):
-		step( Vector2( -1, 0 ) )
-	if event.is_action_pressed("ui_right"):
-		step( Vector2( 1, 0 ) )
-	
-	
+#func _input( event ):
+#
+#	# Input
+#    # Step Actions
+#	if event.is_action_pressed("ui_up"):
+#		step( Vector2( 0, -1 ) )
+#	if event.is_action_pressed("ui_down"):
+#		step( Vector2( 0, 1 ) )
+#	if event.is_action_pressed("ui_left"):
+#		step( Vector2( -1, 0 ) )
+#	if event.is_action_pressed("ui_right"):
+#		step( Vector2( 1, 0 ) )
 	
 	
 	
+#A function that takes a step in the stored path
+#Returns true if done with path
+#Returns false if not
+func path_step():
+	
+	if path.size() == 0:
+		return(true) #Do nothings since there are no more steps left
+	
+	#Take the first Vector2 in the list
+	var next_coords = path.pop_front()
+	
+	#Move the Creature there (remember to convert to world coords from map)
+	position = map.map_to_world(next_coords)
+	
+	return(false)
 	
 	
+	
+#Function that adds a bunch of single points to path
+#This makes a character stand in one position for a ffew cycles
+func command_stay(position, cycles):
+	for i in cycles:
+		path.append(position)
 	
 	
 	

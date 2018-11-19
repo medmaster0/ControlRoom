@@ -11,6 +11,9 @@ export (PackedScene) var Creature
 var background_color
 var workers = [] # a list of "Creatures" that will do the pressing of buttons and shit
 
+var controls = [] #a list of all of the controls (buttons, keypads, sliders, knobs, etc) in the game
+
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -41,16 +44,34 @@ func _ready():
 		var temp_worker = Creature.instance()
 		temp_worker.position = Vector2(500+(i*32),125 ) 
 		$TileMap.add_child(temp_worker)
-		print(i)
 		
+	#Specify "main-player"
+	$TileMap/Creature.is_main = true
 	
-	print($TileMap.find_path($Keypad.position, $TileMap.get_child(1).position  ))
+	#$TileMap.get_child(1).path = $TileMap.find_path( $TileMap.get_child(1).position ,$Keypad.position )
 	#END of READY
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _process(delta):
+	# Called every frame. Delta is time since last frame.
+	# Update game logic here.
+	
+	#Keep running to all the controls
+	#Cycl through all of the creatures
+	for child in $TileMap.get_children():
+		#Skip main player
+		if child.is_main == true:
+			continue
+		
+		#Otherwise check if it needs a new path
+		if child.path.size() == 0:
+			#Call the path finding algo on random control from list
+			#random control
+			var target_control = controls[randi()%controls.size()]
+			child.path = $TileMap.find_path( child.position, target_control.position )
+			#also make sure creature stays there for a while
+			child.command_stay($TileMap.world_to_map(target_control.position),3)
+	
+	pass
 
 #a cool function to set all of the tiles in a path
 func gen_control_paths():
@@ -58,6 +79,8 @@ func gen_control_paths():
 	
 	#Good time to set all of the control positions...
 	set_control_position()
+	
+	add_controls_to_list()
 	
 	#Path t0 buttons
 	var cell_coords #a temp var that goes through each cell we are going to set
@@ -120,3 +143,19 @@ func set_control_position():
 	$Keypad.position = $TileMap.map_to_world(Vector2(3,15))
 	$Keypad2.position = $TileMap.map_to_world(Vector2(7,15))
 	$Keypad3.position = $TileMap.map_to_world(Vector2(11,15))
+	
+#A function that adds all of the pre-placed controls into the list
+#WON"T BE NEEDING FOREVER HOPEFULLY
+func add_controls_to_list():
+	controls.append($Button)
+	controls.append($Button2)
+	controls.append($Button3)
+	controls.append($Knob)
+	controls.append($Knob2)
+	controls.append($Knob3)
+	controls.append($Slider)	
+	controls.append($Slider2)	
+	controls.append($Slider3)	
+	controls.append($Keypad)	
+	controls.append($Keypad2)	
+	controls.append($Keypad3)	
