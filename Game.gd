@@ -44,7 +44,7 @@ func _ready():
 		print(i)
 		
 	
-	#print($TileMap.find_path($Button.position, $TileMap.get_child(1).position  ))
+	print($TileMap.find_path($Keypad.position, $TileMap.get_child(1).position  ))
 	#END of READY
 
 #func _process(delta):
@@ -69,20 +69,39 @@ func gen_control_paths():
 	#Path to knobs
 	cell_coords = $TileMap.world_to_map($Knob.position)
 	for i in range(20):
-		var new_cell = cell_coords + Vector2(i,1)
+		var new_cell = cell_coords + Vector2(i,0)
 		$TileMap.set_cellv(new_cell,1)
 		
 	#Path to sliders
 	cell_coords = $TileMap.world_to_map($Slider.position)
 	for i in range(20):
-		var new_cell = cell_coords + Vector2(i,1)
+		var new_cell = cell_coords + Vector2(i,0)
 		$TileMap.set_cellv(new_cell,1)
 	
 	#Path to keypad
 	cell_coords = $TileMap.world_to_map($Keypad.position)
 	for i in range(20):
-		var new_cell = cell_coords + Vector2(i,1)
+		var new_cell = cell_coords + Vector2(i,0)
 		$TileMap.set_cellv(new_cell,1)
+		
+	#Path connecting them all at the left
+	cell_coords = Vector2(23,3)
+	for i in range(13):
+		var new_cell = cell_coords + Vector2(0,i)
+		$TileMap.set_cellv(new_cell,1)
+		
+	#Path to creature area
+	cell_coords = Vector2(23,10)
+	for i in range(10):
+		var new_cell = cell_coords + Vector2(i,0)
+		$TileMap.set_cellv(new_cell,1)
+		
+	#Holding rectangle
+	cell_coords = Vector2(30,6) #top left corner
+	for i in range(9): #y depth
+		for j in range(12): #x width
+			var new_cell = cell_coords + Vector2(j,i)
+			$TileMap.set_cellv(new_cell, 1)
 	
 	
 func set_control_position():
